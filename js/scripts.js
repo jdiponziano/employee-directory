@@ -19,6 +19,13 @@ async function getEmployees(url) {
   return employees;
 }
 
+//Create element helper function
+function createElement(name, className) {
+  const el = document.createElement(name);
+  el.classList.add(className);
+  return el;
+}
+
 //Modal controls and functions
 function closeModal() {
   const modal = document.querySelector('.modal-container');
@@ -33,8 +40,7 @@ function openModal() {
 //Generate html for employee
 function generateHTML(data) {
   data.map(employee => {
-    const card = document.createElement('div');
-    card.classList.add('card');
+    const card = createElement('div', 'card');
     card.innerHTML = `
       <div class="card-img-container">
         <img class="card-img" src="${employee.picture.medium}" alt="profile picture">
@@ -58,29 +64,20 @@ function generateHTML(data) {
 
 //Generate modal html
 function generateModal(data) {
-  const modalContainer = document.createElement('div');
-  modalContainer.classList.add('modal-container');
+  const modalContainer = createElement('div', 'modal-container');
+  const modal = createElement('div', 'modal');
+  const closeBtn = createElement('button', 'modal-close-btn');
+  const btnContainer = createElement('div', 'modal-btn-container');
 
-  const modal = document.createElement('div');
-  modal.classList.add('modal');
-
-  const closeBtn = document.createElement('button');
-  closeBtn.classList.add('modal-close-btn');
   closeBtn.setAttribute('type', 'button');
   closeBtn.setAttribute('id', 'modal-close-btn');
   closeBtn.innerHTML = '<strong>X</strong>';
-
   closeBtn.addEventListener('click', closeModal);
 
   modal.appendChild(closeBtn);
 
-  const btnContainer = document.createElement('div');
-  btnContainer.classList.add('modal-btn-container');
-  btnContainer.innerHTML = '<button type="button" id="modal-prev" class="modal-prev btn">Prev</button><button type="button" id="modal-next" class="modal-next btn">Next</button>';
-
   data.map(employee => {
-    const modalInfo = document.createElement('div');
-    modalInfo.classList.add('modal-info-container');
+    const modalInfo = createElement('div', 'modal-info-container');
     modalInfo.style.display = 'none';
     modalInfo.innerHTML = `
       <img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">
@@ -93,6 +90,8 @@ function generateModal(data) {
           <p class="modal-text">Birthday: 10/21/2015</p>`;
     modal.appendChild(modalInfo);
   });
+
+  btnContainer.innerHTML = '<button type="button" id="modal-prev" class="modal-prev btn">Prev</button><button type="button" id="modal-next" class="modal-next btn">Next</button>';
 
   modalContainer.appendChild(modal);
   modalContainer.appendChild(btnContainer);
