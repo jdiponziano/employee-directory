@@ -80,14 +80,14 @@ function generateModal(data) {
     const modalInfo = createElement('div', 'modal-info-container');
     modalInfo.style.display = 'none';
     modalInfo.innerHTML = `
-      <img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">
-        <h3 id="name" class="modal-name cap">name</h3>
-        <p class="modal-text">email</p>
-        <p class="modal-text cap">city</p>
+      <img class="modal-img" src="${employee.picture.medium}" alt="profile picture">
+        <h3 id="name" class="modal-name cap">${employee.name.first} ${employee.name.last}</h3>
+        <p class="modal-text">${employee.email}</p>
+        <p class="modal-text cap">${employee.location.city}</p>
         <hr>
-          <p class="modal-text">(555) 555-5555</p>
-          <p class="modal-text">123 Portland Ave., Portland, OR 97204</p>
-          <p class="modal-text">Birthday: 10/21/2015</p>`;
+          <p class="modal-text">${employee.phone}</p>
+          <p class="modal-text cap">${employee.location.street} ${employee.location.city}, ${employee.location.state} ${employee.location.postcode}</p>
+          <p class="modal-text">Birthday: ${employee.dob.date}</p>`;
     modal.appendChild(modalInfo);
   });
 
