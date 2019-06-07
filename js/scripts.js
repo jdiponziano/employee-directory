@@ -32,8 +32,12 @@ function closeModal() {
   modal.style.display = 'none';
 }
 
-function openModal() {
+function openModal(el) {
   const modal = document.querySelector('.modal-container');
+  const index = Array.from(el.parentElement.children).indexOf(el);
+  employeeDetails = document.querySelectorAll('.modal-info-container');
+  employeeDetails.forEach(employee => employee.style.display = 'none');
+  employeeDetails[index].style.display = 'block';
   modal.style.display = 'block';
 }
 
@@ -50,15 +54,12 @@ function generateHTML(data) {
           <p class="card-text">${employee.email}</p>
           <p class="card-text cap">${employee.location.city}, ${employee.location.state}</p>
       </div>`;
-    card.addEventListener('click', function () {
-      const el = this;
-      const index = Array.from(el.parentElement.children).indexOf(el);
-      employeeDetails = document.querySelectorAll('.modal-info-container');
-      employeeDetails[index].style.display = 'block';
-      openModal();
-    });
+
+    card.addEventListener('click', function () { openModal(this); });
+
     gallery.appendChild(card);
   });
+
   generateModal(data);
 }
 
