@@ -55,11 +55,21 @@ function nextEmployee() {
   const employeeDetails = document.querySelectorAll('.modal-info-container');
   const currentSlide = document.querySelector('.active');
   const index = Array.from(currentSlide.parentElement.children).indexOf(currentSlide);
-  console.log(index);
   if (index < employeeDetails.length) {
     hideDetails(employeeDetails);
     employeeDetails[index].style.display = 'block';
     employeeDetails[index].classList.add('active');
+  }
+}
+
+function prevEmployee() {
+  const employeeDetails = document.querySelectorAll('.modal-info-container');
+  const currentSlide = document.querySelector('.active');
+  const index = Array.from(currentSlide.parentElement.children).indexOf(currentSlide);
+  if (index > 1) {
+    hideDetails(employeeDetails);
+    employeeDetails[index - 2].style.display = 'block';
+    employeeDetails[index - 2].classList.add('active');
   }
 }
 
@@ -124,6 +134,9 @@ function generateModal(data) {
 
   const nextButton = document.getElementById('modal-next');
   nextButton.addEventListener('click', nextEmployee);
+
+  const prevButton = document.getElementById('modal-prev');
+  prevButton.addEventListener('click', prevEmployee);
 }
 
 getEmployees(usersUrl).then(generateHTML);
