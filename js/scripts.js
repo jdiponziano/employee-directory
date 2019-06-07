@@ -14,5 +14,25 @@ async function getJSON(url) {
 
 async function getEmployees(url) {
   const employeeJSON = await getJSON(url);
-  return employeeJSON.results;
+  return Promise.all(employeeJSON.results);
 }
+
+//Generate html for employee
+function generateHTML(data) {
+  data.map(employee => {
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.innerHTML = `
+      <div class="card-img-container">
+        <img class="card-img" src="${employee.picture.medium}" alt="profile picture">
+        </div>
+        <div class="card-info-container">
+          <h3 id="name" class="card-name cap">${employee.name.first} ${employee.name.last}</h3>
+          <p class="card-text">${employee.email}</p>
+          <p class="card-text cap">${employee.location.city}, ${employee.location.state}</p>
+      </div>`;
+    gallery.appendChild(card);
+  });
+}
+
+getEmployees(usersUrl).then(generateHTML);
