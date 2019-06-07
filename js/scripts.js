@@ -29,15 +29,24 @@ function createElement(name, className) {
 //Modal controls and functions
 function closeModal() {
   const modal = document.querySelector('.modal-container');
+  const employeeDetails = document.querySelectorAll('.modal-info-container');
+  employeeDetails.forEach(function (employee) {
+    employee.style.display = 'none';
+    employee.classList.remove('active');
+  });
   modal.style.display = 'none';
 }
 
 function openModal(el) {
   const modal = document.querySelector('.modal-container');
   const index = Array.from(el.parentElement.children).indexOf(el);
-  employeeDetails = document.querySelectorAll('.modal-info-container');
-  employeeDetails.forEach(employee => employee.style.display = 'none');
+  const employeeDetails = document.querySelectorAll('.modal-info-container');
+  employeeDetails.forEach(function (employee) {
+    employee.style.display = 'none';
+    employee.classList.remove('active');
+  });
   employeeDetails[index].style.display = 'block';
+  employeeDetails[index].classList.add('active');
   modal.style.display = 'block';
 }
 
