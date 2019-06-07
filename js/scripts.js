@@ -30,10 +30,7 @@ function createElement(name, className) {
 function closeModal() {
   const modal = document.querySelector('.modal-container');
   const employeeDetails = document.querySelectorAll('.modal-info-container');
-  employeeDetails.forEach(function (employee) {
-    employee.style.display = 'none';
-    employee.classList.remove('active');
-  });
+  hideDetails(employeeDetails);
   modal.style.display = 'none';
 }
 
@@ -41,13 +38,17 @@ function openModal(el) {
   const modal = document.querySelector('.modal-container');
   const index = Array.from(el.parentElement.children).indexOf(el);
   const employeeDetails = document.querySelectorAll('.modal-info-container');
-  employeeDetails.forEach(function (employee) {
-    employee.style.display = 'none';
-    employee.classList.remove('active');
-  });
+  hideDetails(employeeDetails);
   employeeDetails[index].style.display = 'block';
   employeeDetails[index].classList.add('active');
   modal.style.display = 'block';
+}
+
+function hideDetails(details) {
+  details.forEach(function (employee) {
+    employee.style.display = 'none';
+    employee.classList.remove('active');
+  });
 }
 
 //Generate html for employee
