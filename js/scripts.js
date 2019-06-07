@@ -19,6 +19,12 @@ async function getEmployees(url) {
   return employees;
 }
 
+//Modal controls and functions
+function closeModal() {
+  const modal = document.querySelector('.modal-container');
+  modal.style.display = 'none';
+}
+
 //Generate html for employee
 function generateHTML(data) {
   data.map(employee => {
@@ -51,6 +57,9 @@ function generateModal(data) {
   closeBtn.setAttribute('type', 'button');
   closeBtn.setAttribute('id', 'modal-close-btn');
   closeBtn.innerHTML = '<strong>X</strong>';
+
+  closeBtn.addEventListener('click', closeModal);
+
   modal.appendChild(closeBtn);
 
   const btnContainer = document.createElement('div');
@@ -75,7 +84,7 @@ function generateModal(data) {
 
   modalContainer.appendChild(modal);
   modalContainer.appendChild(btnContainer);
-  modalContainer.style.display = 'none';
+  //modalContainer.style.display = 'none';
   main.appendChild(modalContainer);
 }
 
