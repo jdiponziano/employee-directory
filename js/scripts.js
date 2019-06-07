@@ -44,6 +44,13 @@ function generateHTML(data) {
           <p class="card-text">${employee.email}</p>
           <p class="card-text cap">${employee.location.city}, ${employee.location.state}</p>
       </div>`;
+    card.addEventListener('click', function () {
+      const el = this;
+      const index = Array.from(el.parentElement.children).indexOf(el);
+      employeeDetails = document.querySelectorAll('.modal-info-container');
+      employeeDetails[index].style.display = 'block';
+      openModal();
+    });
     gallery.appendChild(card);
   });
   generateModal(data);
@@ -94,3 +101,4 @@ function generateModal(data) {
 }
 
 getEmployees(usersUrl).then(generateHTML);
+
