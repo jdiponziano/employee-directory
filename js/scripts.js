@@ -1,6 +1,7 @@
 const usersUrl = 'https://randomuser.me/api/?results=12';
 const gallery = document.getElementById('gallery');
 const search = document.querySelector('.search-container');
+const main = document.getElementsByTagName('main')[0];
 
 //Handle fetch requests
 async function getJSON(url) {
@@ -14,7 +15,7 @@ async function getJSON(url) {
 
 async function getEmployees(url) {
   const employeeJSON = await getJSON(url);
-  employees = await generateHTML(employeeJSON.results);
+  employees = await employeeJSON.results;
   return employees;
 }
 
@@ -34,6 +35,48 @@ function generateHTML(data) {
       </div>`;
     gallery.appendChild(card);
   });
+  generateModal(data);
 }
 
-getEmployees(usersUrl);
+//Generate modal html
+function generateModal(data) {
+  const modalContainer = document.createElement('div');
+  modalContainer.classList.add('modal-container');
+
+  const modal = document.createElement('div');
+  modal.classList.add('modal');
+
+  const closeBtn = document.createElement('button');
+  closeBtn.classList.add('modal-close-btn');
+  closeBtn.setAttribute('type', 'button');
+  closeBtn.setAttribute('id', 'modal-close-btn');
+  closeBtn.innerHTML = '<strong>X</strong>';
+  modal.appendChild(closeBtn);
+
+  const btnContainer = document.createElement('div');
+  btnContainer.classList.add('modal-btn-container');
+  btnContainer.innerHTML = '<button type="button" id="modal-prev" class="modal-prev btn">Prev</button><button type="button" id="modal-next" class="modal-next btn">Next</button>';
+
+  data.map(employee => {
+    const modalInfo = document.createElement('div');
+    modalInfo.classList.add('modal-info-container');
+    modalInfo.style.display = 'none';
+    modalInfo.innerHTML = `
+      <img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">
+        <h3 id="name" class="modal-name cap">name</h3>
+        <p class="modal-text">email</p>
+        <p class="modal-text cap">city</p>
+        <hr>
+          <p class="modal-text">(555) 555-5555</p>
+          <p class="modal-text">123 Portland Ave., Portland, OR 97204</p>
+          <p class="modal-text">Birthday: 10/21/2015</p>`;
+    modal.appendChild(modalInfo);
+  });
+
+  modalContainer.appendChild(modal);
+  modalContainer.appendChild(btnContainer);
+  modalContainer.style.display = 'none';
+  main.appendChild(modalContainer);
+}
+
+getEmployees(usersUrl).then(generateHTML);
