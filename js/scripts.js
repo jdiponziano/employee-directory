@@ -14,7 +14,8 @@ async function getJSON(url) {
 
 async function getEmployees(url) {
   const employeeJSON = await getJSON(url);
-  return Promise.all(employeeJSON.results);
+  employees = await generateHTML(employeeJSON.results);
+  return employees;
 }
 
 //Generate html for employee
@@ -35,4 +36,4 @@ function generateHTML(data) {
   });
 }
 
-getEmployees(usersUrl).then(generateHTML);
+getEmployees(usersUrl);
