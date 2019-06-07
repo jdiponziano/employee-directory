@@ -25,6 +25,11 @@ function closeModal() {
   modal.style.display = 'none';
 }
 
+function openModal() {
+  const modal = document.querySelector('.modal-container');
+  modal.style.display = 'block';
+}
+
 //Generate html for employee
 function generateHTML(data) {
   data.map(employee => {
@@ -84,7 +89,7 @@ function generateModal(data) {
 
   modalContainer.appendChild(modal);
   modalContainer.appendChild(btnContainer);
-  //modalContainer.style.display = 'none';
+  modalContainer.style.display = 'none';
   main.appendChild(modalContainer);
 }
 
