@@ -102,6 +102,8 @@ function generateModal(data) {
   const closeBtn = createElement('button', 'modal-close-btn');
   const btnContainer = createElement('div', 'modal-btn-container');
 
+  btnContainer.innerHTML = '<button type="button" id="modal-prev" class="modal-prev btn">Prev</button><button type="button" id="modal-next" class="modal-next btn">Next</button>';
+
   closeBtn.setAttribute('type', 'button');
   closeBtn.setAttribute('id', 'modal-close-btn');
   closeBtn.innerHTML = '<strong>X</strong>';
@@ -124,20 +126,21 @@ function generateModal(data) {
     modal.appendChild(modalInfo);
   });
 
-  btnContainer.innerHTML = '<button type="button" id="modal-prev" class="modal-prev btn">Prev</button><button type="button" id="modal-next" class="modal-next btn">Next</button>';
-
-
   modalContainer.appendChild(modal);
   modalContainer.appendChild(btnContainer);
   modalContainer.style.display = 'none';
   main.appendChild(modalContainer);
-
-  const nextButton = document.getElementById('modal-next');
-  nextButton.addEventListener('click', nextEmployee);
-
-  const prevButton = document.getElementById('modal-prev');
-  prevButton.addEventListener('click', prevEmployee);
 }
 
-getEmployees(usersUrl).then(generateHTML);
+getEmployees(usersUrl)
+  .then(generateHTML)
+  .catch(err => {
+    console.log(err);
+  })
+  .finally(() => {
+    const nextButton = document.getElementById('modal-next');
+    const prevButton = document.getElementById('modal-prev');
+    nextButton.addEventListener('click', nextEmployee);
+    prevButton.addEventListener('click', prevEmployee);
+  });
 
