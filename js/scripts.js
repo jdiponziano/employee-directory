@@ -26,6 +26,31 @@ function createElement(name, className) {
   return el;
 }
 
+//Create search form
+function createSearchForm() {
+  const form = document.createElement('form');
+  const input = document.createElement('input');
+  const submit = document.createElement('input');
+
+  form.setAttribute('method', 'get');
+  form.setAttribute('action', '#');
+
+  input.setAttribute('type', 'search');
+  input.setAttribute('ID', 'search-input');
+  input.setAttribute('placeholder', 'Search...');
+  input.classList.add('search-input');
+
+  submit.setAttribute('type', "submit");
+  submit.setAttribute('value', "Search");
+  submit.setAttribute('ID', "search-submit");
+  submit.classList.add('search-submit');
+
+  form.appendChild(input);
+  form.appendChild(submit);
+
+  search.appendChild(form);
+}
+
 //Modal controls and functions
 function closeModal() {
   const modal = document.querySelector('.modal-container');
@@ -143,4 +168,7 @@ getEmployees(usersUrl)
     nextButton.addEventListener('click', nextEmployee);
     prevButton.addEventListener('click', prevEmployee);
   });
+
+createSearchForm();
+
 
