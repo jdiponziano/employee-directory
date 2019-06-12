@@ -96,10 +96,16 @@ function nextEmployee() {
   const employeeDetails = document.querySelectorAll('.modal-info-container');
   const currentSlide = document.querySelector('.active');
   const index = Array.from(currentSlide.parentElement.children).indexOf(currentSlide);
-  if (index < employeeDetails.length) {
+  console.log(index);
+  if (index <= (employeeDetails.length - 1)) {
     hideDetails(employeeDetails);
     employeeDetails[index].style.display = 'block';
     employeeDetails[index].classList.add('active');
+    document.getElementById('modal-prev').removeAttribute('disabled');
+  }
+
+  if (index === (employeeDetails.length - 1)) {
+    document.getElementById('modal-next').setAttribute('disabled', 'disabled');
   }
 }
 
@@ -107,10 +113,15 @@ function prevEmployee() {
   const employeeDetails = document.querySelectorAll('.modal-info-container');
   const currentSlide = document.querySelector('.active');
   const index = Array.from(currentSlide.parentElement.children).indexOf(currentSlide);
-  if (index > 1) {
+  console.log(index);
+  if (index >= 2) {
     hideDetails(employeeDetails);
     employeeDetails[index - 2].style.display = 'block';
     employeeDetails[index - 2].classList.add('active');
+    document.getElementById('modal-next').removeAttribute('disabled');
+  }
+  if (index === 2) {
+    document.getElementById('modal-prev').setAttribute('disabled', 'disabled');
   }
 }
 
