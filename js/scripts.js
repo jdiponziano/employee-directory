@@ -171,4 +171,18 @@ getEmployees(usersUrl)
 
 createSearchForm();
 
-
+document.getElementById('search-submit').addEventListener('click', function (e) {
+  e.preventDefault();
+  const inputValue = document.getElementById('search-input').value;
+  const listing = document.getElementById('gallery');
+  const people = listing.children;
+  const results = [];
+  for (let i = 0; i < people.length; i++) {
+    const item = people[i];
+    const name = item.querySelector('#name');
+    if (name.textContent.includes(inputValue)) {
+      results.push(item);
+    }
+  }
+  console.log(results);
+});
