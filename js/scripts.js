@@ -34,6 +34,14 @@ const hideAllPeople = (list) => {
   }
 }
 
+//Show elements
+const showPeople = (list) => {
+  for (let i = 0; i < list.length; i++) {
+    const li = list[i];
+    li.style.display = 'show';
+  }
+}
+
 //Create search form
 function createSearchForm() {
   const form = document.createElement('form');
