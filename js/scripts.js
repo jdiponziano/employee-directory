@@ -38,7 +38,7 @@ const hideAllPeople = (list) => {
 const showPeople = (list) => {
   for (let i = 0; i < list.length; i++) {
     const li = list[i];
-    li.style.display = 'show';
+    li.style.display = 'flex';
   }
 }
 
@@ -201,5 +201,5 @@ document.getElementById('search-submit').addEventListener('click', function (e) 
     }
   }
   hideAllPeople(people);
-  console.log(results);
+  showPeople(results);
 });
