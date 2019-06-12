@@ -1,4 +1,4 @@
-const usersUrl = 'https://randomuser.me/api/?results=12';
+const usersUrl = 'https://randomuser.me/api/?results=12&nat=us';
 const gallery = document.getElementById('gallery');
 const search = document.querySelector('.search-container');
 const main = document.getElementsByTagName('main')[0];
