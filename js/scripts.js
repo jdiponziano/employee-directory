@@ -26,6 +26,14 @@ function createElement(name, className) {
   return el;
 }
 
+//Hide elements
+const hideAllPeople = (list) => {
+  for (let i = 0; i < list.length; i++) {
+    const li = list[i];
+    li.style.display = 'none';
+  }
+}
+
 //Create search form
 function createSearchForm() {
   const form = document.createElement('form');
@@ -184,5 +192,6 @@ document.getElementById('search-submit').addEventListener('click', function (e) 
       results.push(item);
     }
   }
+  hideAllPeople(people);
   console.log(results);
 });
